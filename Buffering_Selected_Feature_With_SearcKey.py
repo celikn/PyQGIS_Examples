@@ -44,11 +44,8 @@ class algTest(QgsProcessingAlgorithm):
             self.OUTPUT_BUFFER, "Output buffer"))
 
     def processAlgorithm(self, parameters, context, feedback):
-
-        FieldNametoSearch=self.parameterAsString(parameters, self.FIELD_TOSEARCH, context)
-       
         #The process takes input and search key, and creates buffer for feture containin search key in the attribute "Name"
-        
+        FieldNametoSearch=self.parameterAsString(parameters, self.FIELD_TOSEARCH, context)
         Expession=FieldNametoSearch+" LIKE '%"+parameters[self.INPUT_SEARCHKEY]+"%'"
         #'\"Name\" LIKE \'%C%\''
         algresult=processing.run("native:extractbyexpression", {'INPUT':parameters[self.INPUT_VECTOR],'EXPRESSION':Expession,'OUTPUT':'TEMPORARY_OUTPUT'})
